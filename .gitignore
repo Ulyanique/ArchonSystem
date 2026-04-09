@@ -68,7 +68,6 @@ node_modules/
 
 # Exclude directories
 design/
-docs/
 backups/
 .cursor
 screenshots/
