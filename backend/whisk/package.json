@@ -1,0 +1,9 @@
+{
+  "name": "archon-whisk",
+  "private": true,
+  "type": "module",
+  "description": "Whisk image generation bridge for ARCHON backend",
+  "dependencies": {
+    "@rohitaryal/whisk-api": "^4.0.0"
+  }
+}

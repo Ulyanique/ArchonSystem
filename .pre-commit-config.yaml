@@ -1,0 +1,24 @@
+repos:
+  - repo: local
+    hooks:
+      - id: frontend-lint
+        name: Frontend ESLint
+        entry: bash -c 'cd frontend && npm run lint'
+        language: system
+      - id: frontend-format-check
+        name: Frontend Prettier check
+        entry: bash -c 'cd frontend && npm run format:check'
+        language: system
+  - repo: https://github.com/psf/black
+    rev: 24.2.0
+    hooks:
+      - id: black
+        name: Backend Black
+        files: ^backend/
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.0.0
+    hooks:
+      - id: flake8
+        name: Backend Flake8
+        files: ^backend/
+        args: [--max-line-length=120]

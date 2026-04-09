@@ -1,0 +1,84 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+.venv/
+venv/
+ENV/
+env.bak/
+pip-log.txt
+pip-delete-this-directory.txt
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Virtual Environment
+venv/
+env/
+*.egg-info/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Logs
+*.log
+logs/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.vs/
+
+# Build artifacts
+dist/
+build/
+*.egg
+*.whl
+
+# Local config (keep .env in repo if needed, but ignore local overrides)
+.env.local
+*.local
+
+# Backup/temp files
+*.bak
+*.tmp
+*.swp
+*.swo
+$null
+
+# PowerShell-specific
+*.ps1.xml
+
+# Node modules
+node_modules/
+
+# Exclude directories
+design/
+docs/
+backups/
+.cursor
+screenshots/
+
+# Explicitly exclude node_modules and venv (for safety)
+frontend/node_modules/
+backend/venv/
+backend/whisk/node_modules/
+
+# Special
+fix_frontend.bat
+/backend/data/
+backend/.env

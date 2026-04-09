@@ -1,0 +1,1002 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Акцентные цвета (терминал/кибер-стиль) — переключаются в настройках */
+:root,
+[data-accent="green"] {
+  --color-accent: #0bda5b;
+  --color-accent-dim: #0a5c36;
+  --color-accent-glow: rgba(11, 218, 91, 0.5);
+  --color-accent-subtle: rgba(11, 218, 91, 0.12);
+}
+[data-accent="blue"] {
+  --color-accent: #0d7ff2;
+  --color-accent-dim: #0a4d8f;
+  --color-accent-glow: rgba(13, 127, 242, 0.5);
+  --color-accent-subtle: rgba(13, 127, 242, 0.12);
+}
+[data-accent="purple"] {
+  --color-accent: #a855f7;
+  --color-accent-dim: #6b21a8;
+  --color-accent-glow: rgba(168, 85, 247, 0.5);
+  --color-accent-subtle: rgba(168, 85, 247, 0.12);
+}
+[data-accent="orange"] {
+  --color-accent: #f48c25;
+  --color-accent-dim: #c2410c;
+  --color-accent-glow: rgba(244, 140, 37, 0.5);
+  --color-accent-subtle: rgba(244, 140, 37, 0.12);
+}
+[data-accent="cyan"] {
+  --color-accent: #22d3ee;
+  --color-accent-dim: #0891b2;
+  --color-accent-glow: rgba(34, 211, 238, 0.5);
+  --color-accent-subtle: rgba(34, 211, 238, 0.12);
+}
+
+/* Тосты: акцентный цвет для иконки загрузки и успеха */
+[data-rht-toaster] [data-type="loading"] > div:first-child {
+  border-top-color: var(--color-accent) !important;
+  border-right-color: var(--color-accent) !important;
+}
+[data-rht-toaster] [data-type="success"] svg {
+  color: var(--color-accent) !important;
+  stroke: var(--color-accent) !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #f8fafc;
+  color: #1e293b;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Тёмная тема только на внутренних страницах (кроме главной — список вселенных) */
+[data-theme="dark"] body.inner-pages {
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+[data-theme="dark"] .inner-pages.app-layout {
+  background-color: #0f172a;
+}
+[data-theme="dark"] .inner-pages .app-header {
+  background-color: #1e293b !important;
+  border-color: #334155;
+  color: #f1f5f9;
+}
+[data-theme="dark"] .inner-pages .app-header button:hover {
+  background-color: #334155;
+}
+[data-theme="dark"] .inner-pages .page-content {
+  background-color: #0f172a;
+  color: #e2e8f0;
+}
+[data-theme="dark"] .inner-pages .card {
+  background-color: #1e293b;
+  border-color: #334155;
+  color: #e2e8f0;
+}
+[data-theme="dark"] .inner-pages .btn-secondary {
+  background-color: #334155;
+  color: #e2e8f0;
+  border-color: #475569;
+}
+[data-theme="dark"] .inner-pages .btn-secondary:hover {
+  background-color: #475569;
+}
+[data-theme="dark"] .inner-pages .input {
+  background-color: #1e293b;
+  border-color: #475569;
+  color: #f1f5f9;
+}
+[data-theme="dark"] .inner-pages .input::placeholder {
+  color: #94a3b8;
+}
+[data-theme="dark"] .inner-pages .input:focus {
+  border-color: var(--color-accent);
+  background-color: #1e293b;
+}
+/* Тёмная тема — заголовки и текст на внутренних страницах */
+[data-theme="dark"] .inner-pages .text-dark-800 { color: #f1f5f9 !important; }
+[data-theme="dark"] .inner-pages .text-dark-600 { color: #cbd5e1 !important; }
+[data-theme="dark"] .inner-pages .text-dark-500 { color: #94a3b8 !important; }
+[data-theme="dark"] .inner-pages .text-dark-400 { color: #94a3b8 !important; }
+[data-theme="dark"] .inner-pages .text-dark-300 { color: #94a3b8 !important; }
+[data-theme="dark"] .inner-pages .bg-white { background-color: #1e293b !important; }
+[data-theme="dark"] .inner-pages .border-dark-200 { border-color: #334155 !important; }
+[data-theme="dark"] .inner-pages .border-dark-100 { border-color: #334155 !important; }
+[data-theme="dark"] .inner-pages .bg-dark-50 { background-color: #0f172a !important; }
+[data-theme="dark"] .inner-pages .bg-dark-100 { background-color: #1e293b !important; }
+/* Селекты, модалки, выпадающие списки */
+[data-theme="dark"] .inner-pages select {
+  background-color: #1e293b;
+  border-color: #475569;
+  color: #f1f5f9;
+}
+[data-theme="dark"] .inner-pages select option {
+  background-color: #1e293b;
+  color: #f1f5f9;
+}
+[data-theme="dark"] .inner-pages .text-primary-600 { color: var(--color-accent) !important; }
+[data-theme="dark"] .inner-pages .text-primary-500 { color: var(--color-accent) !important; }
+[data-theme="dark"] .inner-pages .bg-primary-50 { background-color: rgba(30, 41, 59, 0.95) !important; }
+[data-theme="dark"] .inner-pages .bg-primary-100 { background-color: rgba(59, 130, 246, 0.2) !important; }
+[data-theme="dark"] .inner-pages .bg-primary-200 { background-color: rgba(59, 130, 246, 0.3) !important; }
+[data-theme="dark"] .inner-pages .border-primary-200 { border-color: rgba(59, 130, 246, 0.4) !important; }
+[data-theme="dark"] .inner-pages .border-primary-300 { border-color: rgba(59, 130, 246, 0.5) !important; }
+[data-theme="dark"] .inner-pages .text-primary-700 { color: #93c5fd !important; }
+[data-theme="dark"] .inner-pages .text-primary-800 { color: #bfdbfe !important; }
+[data-theme="dark"] .inner-pages .text-primary-900 { color: #dbeafe !important; }
+[data-theme="dark"] .inner-pages .bg-blue-50 { background-color: rgba(30, 41, 59, 0.9) !important; }
+[data-theme="dark"] .inner-pages .border-blue-100 { border-color: #334155 !important; }
+[data-theme="dark"] .inner-pages .text-blue-700 { color: #93c5fd !important; }
+[data-theme="dark"] .inner-pages .bg-green-50 { background-color: rgba(30, 41, 59, 0.9) !important; }
+[data-theme="dark"] .inner-pages .border-green-100 { border-color: #334155 !important; }
+[data-theme="dark"] .inner-pages .text-green-700 { color: #86efac !important; }
+[data-theme="dark"] .inner-pages .bg-red-50 { background-color: rgba(30, 41, 59, 0.9) !important; }
+[data-theme="dark"] .inner-pages .border-red-100 { border-color: #7f1d1d !important; }
+[data-theme="dark"] .inner-pages .text-red-700 { color: #fca5a5 !important; }
+[data-theme="dark"] .inner-pages .border-dark-300 { border-color: #475569 !important; }
+[data-theme="dark"] .inner-pages .bg-dark-200 { background-color: #334155 !important; }
+[data-theme="dark"] .inner-pages .hover\:bg-dark-100:hover { background-color: #334155 !important; }
+[data-theme="dark"] .inner-pages .hover\:bg-dark-300:hover { background-color: #475569 !important; }
+[data-theme="dark"] .inner-pages .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3); }
+/* Серые/сланцевые классы (чат, таймлайн, модалки) */
+[data-theme="dark"] .inner-pages .bg-gray-50 { background-color: #1e293b !important; }
+[data-theme="dark"] .inner-pages .bg-gray-100 { background-color: #334155 !important; }
+[data-theme="dark"] .inner-pages .bg-gray-200 { background-color: #475569 !important; }
+[data-theme="dark"] .inner-pages .text-gray-500 { color: #94a3b8 !important; }
+[data-theme="dark"] .inner-pages .text-gray-700 { color: #cbd5e1 !important; }
+[data-theme="dark"] .inner-pages .border-gray-200 { border-color: #334155 !important; }
+[data-theme="dark"] .inner-pages .border-gray-300 { border-color: #475569 !important; }
+[data-theme="dark"] .inner-pages .bg-slate-500 { background-color: #64748b !important; }
+[data-theme="dark"] .inner-pages .bg-purple-50 { background-color: rgba(30, 41, 59, 0.9) !important; }
+[data-theme="dark"] .inner-pages .border-purple-200 { border-color: #334155 !important; }
+[data-theme="dark"] .inner-pages .hover\:bg-gray-200:hover { background-color: #475569 !important; }
+[data-theme="dark"] .inner-pages .ring-primary-500 { --tw-ring-color: var(--color-accent) !important; }
+/* Чат — сообщения AI и текст */
+[data-theme="dark"] .inner-pages .prose { color: #e2e8f0 !important; }
+[data-theme="dark"] .inner-pages .prose p { color: #e2e8f0 !important; }
+[data-theme="dark"] .inner-pages .prose h1, [data-theme="dark"] .inner-pages .prose h2, [data-theme="dark"] .inner-pages .prose h3 { color: #f1f5f9 !important; }
+[data-theme="dark"] .inner-pages .prose strong { color: #c084fc !important; }
+[data-theme="dark"] .inner-pages .prose code { background-color: #334155 !important; color: #e2e8f0 !important; }
+[data-theme="dark"] .inner-pages .prose pre { background-color: #1e293b !important; color: #e2e8f0 !important; }
+[data-theme="dark"] .inner-pages .prose a { color: var(--color-accent) !important; }
+[data-theme="dark"] .inner-pages .text-gray-600 { color: #cbd5e1 !important; }
+[data-theme="dark"] .inner-pages .text-gray-800 { color: #e2e8f0 !important; }
+[data-theme="dark"] .inner-pages .text-gray-900 { color: #f1f5f9 !important; }
+[data-theme="dark"] .inner-pages .text-purple-600 { color: #c084fc !important; }
+[data-theme="dark"] .inner-pages .text-purple-700 { color: #a855f7 !important; }
+[data-theme="dark"] .inner-pages .text-purple-800 { color: #c084fc !important; }
+/* Чат — кнопки действий под сообщениями */
+[data-theme="dark"] .inner-pages .hover\:bg-gray-100:hover { background-color: #334155 !important; }
+[data-theme="dark"] .inner-pages .active\:bg-gray-200:active { background-color: #475569 !important; }
+[data-theme="dark"] .inner-pages .hover\:bg-red-100:hover { background-color: #7f1d1d !important; }
+[data-theme="dark"] .inner-pages .active\:bg-red-200:active { background-color: #991b1b !important; }
+[data-theme="dark"] .inner-pages .hover\:text-gray-600:hover { color: #cbd5e1 !important; }
+[data-theme="dark"] .inner-pages .hover\:text-red-600:hover { color: #fca5a5 !important; }
+[data-theme="dark"] .inner-pages .text-gray-400 { color: #94a3b8 !important; }
+/* Чат — пустое состояние и индикатор печатает */
+[data-theme="dark"] .inner-pages .text-gray-400 { color: #94a3b8 !important; }
+[data-theme="dark"] .inner-pages .bg-gradient-to-br.from-gray-400.to-gray-600 { background: linear-gradient(to bottom right, #64748b, #475569) !important; }
+/* Чат — поле ввода */
+[data-theme="dark"] .inner-pages form.bg-white { background-color: #1e293b !important; border-color: #334155 !important; }
+[data-theme="dark"] .inner-pages textarea.bg-white { background-color: #1e293b !important; border-color: #475569 !important; color: #f1f5f9 !important; }
+[data-theme="dark"] .inner-pages textarea.text-gray-900 { color: #f1f5f9 !important; }
+[data-theme="dark"] .inner-pages textarea.placeholder-gray-400::placeholder { color: #64748b !important; opacity: 0.8; }
+[data-theme="dark"] .inner-pages textarea.border-gray-300 { border-color: #475569 !important; }
+[data-theme="dark"] .inner-pages textarea:focus { border-color: var(--color-accent) !important; }
+[data-theme="dark"] .inner-pages textarea:focus.ring-blue-500 { --tw-ring-color: var(--color-accent) !important; }
+/* Чат — индикатор "печатает" */
+[data-theme="dark"] .inner-pages .chat-message-content { color: #e2e8f0 !important; }
+/* Чат — боковая панель истории */
+[data-theme="dark"] .inner-pages .bg-white\/50 { background-color: rgba(30, 41, 59, 0.8) !important; }
+[data-theme="dark"] .inner-pages .bg-white\/60 { background-color: rgba(30, 41, 59, 0.9) !important; }
+[data-theme="dark"] .inner-pages .hover\:bg-white\/60:hover { background-color: rgba(30, 41, 59, 0.9) !important; }
+/* Чат — заголовок и поиск */
+[data-theme="dark"] .inner-pages .text-gray-600 { color: #cbd5e1 !important; }
+[data-theme="dark"] .inner-pages input.bg-dark-50 { background-color: #1e293b !important; }
+[data-theme="dark"] .inner-pages input.border-dark-200 { border-color: #475569 !important; }
+[data-theme="dark"] .inner-pages input:focus { border-color: var(--color-accent) !important; }
+[data-theme="dark"] .inner-pages input::placeholder { color: #94a3b8 !important; }
+/* Чат — кнопки действий */
+[data-theme="dark"] .inner-pages .hover\:bg-primary-50:hover { background-color: rgba(59, 130, 246, 0.15) !important; }
+[data-theme="dark"] .inner-pages .active\:bg-primary-100:active { background-color: rgba(59, 130, 246, 0.25) !important; }
+[data-theme="dark"] .inner-pages .hover\:bg-red-50:hover { background-color: rgba(239, 68, 68, 0.15) !important; }
+[data-theme="dark"] .inner-pages .active\:bg-red-100:active { background-color: rgba(239, 68, 68, 0.25) !important; }
+/* Музыкальный плеер — ограничение ширины для предотвращения перекрытия */
+.app-header .ml-auto { max-width: calc(100% - 200px); overflow: hidden; flex-shrink: 1; min-width: 0; }
+
+#root {
+  min-height: 100vh;
+}
+
+/* Типографическая иерархия */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; }
+h2 { font-size: 1.5rem; font-weight: 600; }
+h3 { font-size: 1.25rem; font-weight: 600; }
+h4 { font-size: 1.125rem; font-weight: 600; }
+
+/* Технические элементы — моноширинный шрифт */
+.font-mono,
+code,
+pre,
+kbd,
+samp {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-feature-settings: 'kern' 1;
+  letter-spacing: 0.01em;
+}
+
+/* Декоративные заголовки в терминальном стиле */
+.font-display {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Пиксельный шрифт для специальных элементов (если нужен) */
+.font-pixel {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+/* Улучшенная читаемость для основного текста */
+p, li, span, div {
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+}
+
+/* Заголовки в кибер-стиле */
+.cyber-heading {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+/* Технические метки и статусы */
+.tech-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Улучшенная типографика для тёмной темы */
+[data-theme="dark"] body {
+  font-weight: 400;
+}
+
+[data-theme="dark"] .inner-pages h1,
+[data-theme="dark"] .inner-pages h2,
+[data-theme="dark"] .inner-pages h3 {
+  color: #f1f5f9;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .inner-pages .cyber-heading {
+  color: #e2e8f0;
+  text-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+  font-family: 'Inter', sans-serif;
+}
+
+[data-theme="dark"] .inner-pages .tech-label {
+  color: var(--color-accent);
+  opacity: 0.9;
+}
+
+/* Улучшенная читаемость для моноширинного текста (только для инлайн элементов) */
+[data-theme="dark"] .inner-pages .font-mono:not(pre):not(code) {
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .inner-pages pre.font-mono,
+[data-theme="dark"] .inner-pages code.font-mono {
+  background-color: rgba(30, 41, 59, 0.8);
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* Заголовки страниц */
+.page-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* Подзаголовки и описания */
+.page-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+/* Сайдбар — улучшенная типографика */
+.sidebar-item {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.sidebar-item.active {
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+/* Кнопки — улучшенная читаемость */
+.btn {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.btn-primary {
+  font-weight: 600;
+}
+
+/* Заголовок ARCHON в сайдбаре — всегда акцентный цвет */
+.sidebar-header h1 {
+  color: var(--color-accent) !important;
+}
+
+/* Улучшенная читаемость для мелкого текста */
+.text-xs, .text-sm {
+  letter-spacing: -0.005em;
+  line-height: 1.5;
+}
+
+/* Единая высота верхних полос: сайдбар, заголовок приложения, панель очереди задач */
+:root {
+  --top-bar-height: 3.5rem; /* 56px */
+}
+.sidebar-header,
+.app-header,
+.jobs-panel-header,
+.page-title-bar {
+  height: var(--top-bar-height);
+  min-height: var(--top-bar-height);
+  max-height: var(--top-bar-height);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.app-header {
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+/* Первая строка контента страницы (заголовок + тулбар) — та же высота, если это flex-блок */
+.page-content > div > div:first-child.flex {
+  min-height: var(--top-bar-height);
+}
+
+/* Технические элементы (время, ID) — всегда моноширинный */
+.tech-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-colors duration-100;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-600 text-white hover:bg-primary-700;
+  }
+  
+  .btn-secondary {
+    @apply bg-dark-200 text-dark-800 hover:bg-dark-300;
+  }
+  
+  .btn-danger {
+    @apply bg-red-600 text-white hover:bg-red-700;
+  }
+  
+  .input {
+    @apply w-full px-3 py-2 border border-dark-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-sm border border-dark-200 p-4;
+  }
+  
+  .sidebar-item {
+    @apply flex items-center gap-3 -ml-4 pl-4 pr-3 py-2 rounded-lg cursor-pointer transition-all duration-100 text-sm;
+  }
+  
+  .sidebar-item svg {
+    color: var(--color-accent);
+    transition: color 0.1s;
+  }
+  
+  .sidebar-item:hover {
+    @apply bg-dark-700;
+  }
+  
+  .sidebar-item.active {
+    background-color: var(--color-accent);
+    @apply text-white;
+  }
+  
+  .sidebar-item.active svg {
+    color: white;
+  }
+}
+
+/* Акцент из настроек — основной интерфейс (сайдбар, кнопки, чат) */
+.text-accent { color: var(--color-accent); }
+.bg-accent { background-color: var(--color-accent); }
+.bg-accent\/30 { background-color: color-mix(in srgb, var(--color-accent) 30%, transparent); }
+.bg-accent-subtle { background-color: var(--color-accent-subtle); }
+.border-accent { border-color: var(--color-accent); }
+.border-accent-dim { border-color: var(--color-accent-dim); }
+.ring-accent { --tw-ring-color: var(--color-accent); }
+.ring-accent:focus { --tw-ring-color: var(--color-accent); }
+.hover\:bg-accent-subtle:hover { background-color: var(--color-accent-subtle); }
+/* Чат — выделение strong и ссылок в сообщениях AI акцентным цветом */
+[data-accent] .chat-message-content strong { color: var(--color-accent); }
+[data-accent] .chat-message-content a { color: var(--color-accent); }
+
+[data-accent] .btn-primary {
+  background-color: var(--color-accent);
+  color: #fff;
+}
+[data-accent] .btn-primary:hover {
+  filter: brightness(1.1);
+}
+[data-accent] .input:focus {
+  --tw-ring-color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* Терминал событий (правая панель) — выделение текста акцентом */
+.terminal-log::selection {
+  background-color: var(--color-accent-subtle);
+}
+
+/* Мигание курсора в терминале событий */
+@keyframes terminal-cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+.terminal-cursor-blink {
+  animation: terminal-cursor-blink 1s step-end infinite;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.05s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-slideDown {
+  animation: slideDown 0.05s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.05s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-zoomIn {
+  animation: zoomIn 0.05s ease-out forwards;
+  opacity: 0;
+}
+
+/* Terminal grid background — использует акцент из настроек */
+.terminal-grid {
+  background-image: 
+    linear-gradient(var(--color-accent-subtle) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-accent-subtle) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 0;
+}
+
+/* CRT Overlay Effect */
+.crt-overlay::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 0, 0.06));
+  z-index: 50;
+  background-size: 100% 3px, 3px 100%;
+  pointer-events: none;
+}
+
+.scanline {
+  width: 100%;
+  height: 100px;
+  z-index: 51;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(46, 204, 113, 0.1) 50%, rgba(0, 0, 0, 0) 100%);
+  opacity: 0.1;
+  position: fixed;
+  pointer-events: none;
+}
+
+.terminal-container {
+  border: 2px solid var(--color-accent-dim);
+  box-shadow: inset 0 0 20px var(--color-accent-subtle), 0 0 15px var(--color-accent-glow);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #0a0d0b;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-accent-dim);
+  border: 1px solid var(--color-accent);
+}
+
+.card-glitch:hover {
+  animation: flicker 0.1s infinite;
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px var(--color-accent-glow);
+}
+
+.btn-terminal {
+  transition: all 0.1s ease;
+  position: relative;
+  overflow: hidden;
+}
+.btn-terminal:hover {
+  background-color: var(--color-accent);
+  color: #0a0d0b;
+  box-shadow: 0 0 20px var(--color-accent);
+}
+.btn-terminal:active {
+  transform: scale(0.95);
+}
+
+/* Design 3 Styles */
+.scanline-design3 {
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+  background: linear-gradient(0deg, rgba(0,0,0,0) 50%, rgba(255,255,255,0.02) 50%);
+  background-size: 100% 4px;
+  position: fixed;
+  pointer-events: none;
+}
+
+.glow-border {
+  box-shadow: 0 0 15px rgba(13, 127, 242, 0.15);
+}
+
+.neon-text-blue {
+  text-shadow: 0 0 8px rgba(13, 127, 242, 0.6);
+}
+
+.custom-scrollbar-design3::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar-design3::-webkit-scrollbar-track {
+  background: rgba(13, 127, 242, 0.05);
+}
+.custom-scrollbar-design3::-webkit-scrollbar-thumb {
+  background: rgba(13, 127, 242, 0.2);
+  border-radius: 2px;
+}
+.custom-scrollbar-design3::-webkit-scrollbar-thumb:hover {
+  background: rgba(13, 127, 242, 0.4);
+}
+
+/* Design V3 Styles */
+.cyber-grid {
+  mask-image: radial-gradient(circle at center, black, transparent 80%);
+}
+
+.glow-text-v3 {
+  text-shadow: 0 0 15px rgba(244, 140, 37, 0.5), 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+.hologram-btn {
+  box-shadow: 0 0 20px rgba(244, 140, 37, 0.4), inset 0 0 10px rgba(244, 140, 37, 0.2);
+}
+
+.card-3d {
+  transform: perspective(1000px) rotateY(-5deg);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.card-3d:hover {
+  transform: perspective(1000px) rotateY(0deg) scale(1.02);
+  border-color: #f48c25;
+}
+
+.wireframe-sphere {
+  background: radial-gradient(circle, rgba(244, 140, 37, 0.1) 0%, transparent 70%);
+  position: relative;
+}
+
+.wireframe-sphere::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px dashed rgba(244, 140, 37, 0.3);
+  border-radius: 50%;
+}
+
+.custom-scrollbar-v3::-webkit-scrollbar {
+  height: 6px;
+}
+.custom-scrollbar-v3::-webkit-scrollbar-track {
+  background: rgba(244, 140, 37, 0.05);
+}
+.custom-scrollbar-v3::-webkit-scrollbar-thumb {
+  background: #f48c25;
+  border-radius: 10px;
+}
+
+/* Design V2 Styles */
+@keyframes flicker {
+  0% { opacity: 0.97; }
+  5% { opacity: 0.95; }
+  10% { opacity: 0.9; }
+  15% { opacity: 0.98; }
+  30% { opacity: 0.95; }
+  50% { opacity: 0.99; }
+  80% { opacity: 0.92; }
+  100% { opacity: 0.98; }
+}
+
+@keyframes blink {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.terminal-container-v2 {
+  animation: flicker 0.15s infinite;
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+.btn-terminal-v2 {
+  transition: all 0.15s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-terminal-v2:hover {
+  box-shadow: 0 0 10px var(--color-accent-glow), 0 0 20px var(--color-accent-subtle);
+}
+
+.universe-card-v2:hover {
+  background: var(--color-accent-subtle);
+  box-shadow: 0 0 10px var(--color-accent-glow), 0 0 20px var(--color-accent-subtle);
+}
+
+.line-clamp-5 {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Единый стиль прокрутки приложения: размер и форма */
+.app-scrollbar::-webkit-scrollbar,
+.sidebar-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.app-scrollbar::-webkit-scrollbar-track,
+.sidebar-scrollbar::-webkit-scrollbar-track {
+  border-radius: 3px;
+}
+.app-scrollbar::-webkit-scrollbar-thumb,
+.sidebar-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+}
+
+/* Светлый фон (контент, палитра, сайдбар чата): тёмный ползунок, акцент при наведении */
+.app-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.06);
+}
+.app-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+}
+.app-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-dim);
+}
+.app-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.06);
+}
+
+/* Тёмный фон (левый сайдбар, терминал): светлый ползунок */
+.sidebar-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+.sidebar-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+}
+.sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* Firefox для тёмного сайдбара + резерв под скроллбар (правый край совпадает с кнопкой «Выйти») */
+.sidebar-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) rgba(0, 0, 0, 0.2);
+  scrollbar-gutter: stable;
+}
+
+
+/* Оптимизация для предотвращения прыжков чата */
+.scrollbar-hide {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Предотвращение layout shift при обновлении сообщений */
+.prose {
+  contain: layout style;
+  will-change: contents;
+}
+
+.prose p {
+  min-height: 1.5em;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* Плавная анимация появления текста при стриминге */
+.chat-message-content {
+  animation: fadeInText 0.03s ease-out;
+  transition: opacity 0.02s ease-out;
+}
+
+@keyframes fadeInText {
+  from {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Плавное появление новых символов */
+.chat-message-content * {
+  transition: opacity 0.01s ease-out;
+}
+
+/* Плавная анимация для новых сообщений */
+.chat-message-content p:last-child {
+  animation: slideInText 0.05s ease-out;
+}
+
+@keyframes slideInText {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Анимация точек "печатает" */
+@keyframes typing-dot {
+  0%, 20% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  80%, 100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+}
+
+.typing-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: 3px;
+  height: 16px;
+  vertical-align: middle;
+}
+
+.typing-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+  animation: typing-dot 0.5s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+.typing-dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+/* Кастомный стиль для слайдера громкости */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-track {
+  background: #e5e7eb;
+  height: 6px;
+  border-radius: 3px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #2563eb;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  margin-top: -4px;
+  transition: all 0.1s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: #1d4ed8;
+  transform: scale(1.1);
+}
+
+input[type="range"]:disabled::-webkit-slider-thumb {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+input[type="range"]::-moz-range-track {
+  background: #e5e7eb;
+  height: 6px;
+  border-radius: 3px;
+}
+
+input[type="range"]::-moz-range-thumb {
+  background: #2563eb;
+  height: 14px;
+  width: 14px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  background: #1d4ed8;
+  transform: scale(1.1);
+}
+
+input[type="range"]:disabled::-moz-range-thumb {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Поддержка backdrop-blur для браузеров */
+@supports (backdrop-filter: blur(10px)) {
+  .backdrop-blur-md {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  
+  .backdrop-blur-sm {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+}
+
+/* Улучшенные градиенты для сообщений */
+.message-user-gradient {
+  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 50%, #8b5cf6 100%);
+}
+
+.message-ai-gradient {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.8) 100%);
+}
+
+/* Плавные тени для глубины */
+.shadow-glow-blue {
+  box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3), 0 8px 10px -6px rgba(59, 130, 246, 0.2);
+}
+
+.shadow-glow-purple {
+  box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.3), 0 8px 10px -6px rgba(168, 85, 247, 0.2);
+}
+
+.shadow-glow-red {
+  box-shadow: 0 10px 25px -5px rgba(239, 68, 68, 0.3), 0 8px 10px -6px rgba(239, 68, 68, 0.2);
+}
