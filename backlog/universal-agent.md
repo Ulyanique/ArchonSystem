@@ -1,5 +1,5 @@
-# Backlog — Universal Agent
+# Backlog — Universal-Agent
 
 ## Задачи
 
-- [ ] [высокий] Ожидание создания ролей meta-agent
+- [x] [высокий] Создать `docs/consistency-protocol.md` с чек-листом AICritic + links + coverage. DoD: файл создан, содержит чек-лист. (Подцель P-003)

@@ -36,14 +36,14 @@
 
 | # | Подцель | DoD (проверяется без LLM) | Статус |
 |---|---------|---------------------------|--------|
-| P-001 | Инфраструктура агентов | `state/roadmap.md`, `reports/summary.md`, `reports/changelog.md`, backlog meta/universal с DoD-задачами | ожидает meta |
-| P-002 | Роли первого старта | Все файлы из «Роли первого старта» в `agents/` + state/backlog/reports для каждого | ожидает meta |
-| P-003 | Протокол согласованности | `docs/consistency-protocol.md` с чек-листом AICritic + links + coverage | ожидает meta |
+| P-001 | Инфраструктура агентов | `state/roadmap.md`, `reports/summary.md`, `reports/changelog.md`, backlog meta/universal с DoD-задачами | **выполнено** |
+| P-002 | Роли первого старта | Все файлы из «Роли первого старта» в `agents/` + state/backlog/reports для каждого | **выполнено** |
+| P-003 | Протокол согласованности | `docs/consistency-protocol.md` с чек-листом AICritic + links + coverage | **выполнено** |
 | P-004 | Стабилизация (фаза 0) | ≥3 пункта из `stabilization.md` закрыты с тестами или ручной проверкой в отчёте | не начато |
 | P-005 | Backend health | `pytest` в `backend/tests/` — green; Swagger `/docs` открывается | не начато |
 | P-006 | Frontend health | `npm test` + `npm run build` в `frontend/` — green | не начато |
 
-**Прогресс:** 0/6 подцелей.
+**Прогресс:** 3/6 подцелей.
 
 ## Принципы
 
@@ -148,7 +148,7 @@ Meta на первой итерации создаёт **промпты-роли
 - **Итерация:** 0
 - **Статус:** SEED заполнен; ожидает первый цикл (режим A в AGENTS.md)
 - **Агенты:** meta-agent, universal-agent (+ 12 ролей к созданию)
-- **Прогресс:** 0% (0/6 подцелей)
+- **Прогресс:** 50% (3/6 подцелей)
 - **Продукт:** v0.1.0; фаза 0 stabilization в процессе
 - **Roadmap:** `state/roadmap.md` (создаст meta); продукт — `docs/roadmap/`
 - **Данные:** `backend/data/archon_master.db`, universes в `backend/data/universes/{id}/`
