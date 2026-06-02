@@ -52,6 +52,8 @@ def test_rag_service_mock(monkeypatch):
             return MockCollection()
         def create_collection(self, name, **kwargs):
             return MockCollection()
+        def get_or_create_collection(self, name, **kwargs):
+            return MockCollection()
 
     class MockCollection:
         def add(self, **kwargs): pass
