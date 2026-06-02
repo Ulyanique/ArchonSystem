@@ -7,9 +7,32 @@ import { techApi } from '../api';
 
 export default function TechnologiesPage() {
   const { universeId } = useParams();
+  const queryClient = useQueryClient();
   const [activeTab, setActiveTab] = useState<'tech' | 'artifacts'>('tech');
   const [showForm, setShowForm] = useState(false);
   const [editingItem, setEditingItem] = useState<any>(null);
+
+  const deleteTechMutation = useMutation({
+    mutationFn: (id: number) => techApi.deleteTech(parseInt(universeId!), id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['techs', universeId] });
+      toast.success('Технология удалена');
+    },
+    onError: () => {
+      toast.error('Ошибка при удалении технологии');
+    }
+  });
+
+  const deleteArtifactMutation = useMutation({
+    mutationFn: (id: number) => techApi.deleteArtifact(parseInt(universeId!), id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['artifacts', universeId] });
+      toast.success('Артефакт удален');
+    },
+    onError: () => {
+      toast.error('Ошибка при удалении артефакта');
+    }
+  });
 
   const { data: techs = [], isLoading: loadingTechs } = useQuery({
     queryKey: ['techs', universeId],
@@ -63,7 +86,16 @@ export default function TechnologiesPage() {
                 <button onClick={() => { setEditingItem(item); setShowForm(true); }} className="p-2 hover:bg-dark-50 rounded-lg text-dark-400 hover:text-primary-600">
                   <Edit2 size={16} />
                 </button>
-                <button onClick={() => confirm('Удалить?') && (activeTab === 'tech' ? techApi.deleteTech(parseInt(universeId!), item.id) : techApi.deleteArtifact(parseInt(universeId!), item.id))} className="p-2 hover:bg-red-50 rounded-lg text-dark-400 hover:text-red-500">
+                <button
+                  onClick={() => {
+                    if (confirm('Удалить?')) {
+                      activeTab === 'tech'
+                        ? deleteTechMutation.mutate(item.id)
+                        : deleteArtifactMutation.mutate(item.id);
+                    }
+                  }}
+                  className="p-2 hover:bg-red-50 rounded-lg text-dark-400 hover:text-red-500"
+                >
                   <Trash2 size={16} />
                 </button>
               </div>
