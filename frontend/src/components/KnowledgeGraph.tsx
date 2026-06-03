@@ -8,6 +8,7 @@ import ReactFlow, {
   useEdgesState,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
+import toast from 'react-hot-toast';
 import { GraphData } from '../types';
 import { linksApi } from '../api';
 
@@ -116,7 +117,7 @@ export default function KnowledgeGraph({ data, universeId, onNodeClick, graphVie
             universeId,
             nodesList.map((n) => ({ id: n.id, position: n.position }))
           )
-          .catch(() => {});
+          .catch(() => toast.error('Не удалось сохранить позицию графа'));
       }
     },
     [universeId, graphView]
