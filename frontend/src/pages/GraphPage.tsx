@@ -41,6 +41,7 @@ export default function GraphPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['links', universeId] });
       queryClient.invalidateQueries({ queryKey: ['graph', universeId] });
+      queryClient.invalidateQueries({ queryKey: ['graph-space', universeId] });
     },
   });
 
@@ -86,6 +87,7 @@ export default function GraphPage() {
     linksApi.create(parseInt(universeId!), linkData).then(() => {
       queryClient.invalidateQueries({ queryKey: ['links', universeId] });
       queryClient.invalidateQueries({ queryKey: ['graph', universeId] });
+      queryClient.invalidateQueries({ queryKey: ['graph-space', universeId] });
       setSuggestions([]);
     });
   };
@@ -288,6 +290,7 @@ export default function GraphPage() {
           onSuccess={() => {
             queryClient.invalidateQueries({ queryKey: ['links', universeId] });
             queryClient.invalidateQueries({ queryKey: ['graph', universeId] });
+            queryClient.invalidateQueries({ queryKey: ['graph-space', universeId] });
             setShowCreateModal(false);
           }}
         />

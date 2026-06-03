@@ -1001,11 +1001,11 @@ export default function BookEditorPage() {
       if (!chapter) return;
       try {
         if (newActOutlineId === null) {
-          if (outlineItemId != null) deleteOutlineMutation.mutate(outlineItemId);
+          if (outlineItemId != null) await deleteOutlineMutation.mutateAsync(outlineItemId);
           return;
         }
         if (outlineItemId != null) {
-          moveOutlineMutation.mutate({ itemId: outlineItemId, afterItemId: newActOutlineId });
+          await moveOutlineMutation.mutateAsync({ itemId: outlineItemId, afterItemId: newActOutlineId });
         } else {
           const item = await createOutlineMutation.mutateAsync({
             title: chapter.title,
