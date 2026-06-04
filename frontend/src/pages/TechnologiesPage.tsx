@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { Plus, Trash2, Edit2, Cpu, Box, Loader2, X, FlaskConical } from 'lucide-react';
 import { techApi } from '../api';
+import EmptyState from '../components/EmptyState';
 
 export default function TechnologiesPage() {
   const { universeId } = useParams();
@@ -75,6 +76,15 @@ export default function TechnologiesPage() {
           </button>
       </div>
 
+      {(activeTab === 'tech' ? techs : artifacts).length === 0 ? (
+        <EmptyState
+          icon={activeTab === 'tech' ? FlaskConical : Box}
+          title={activeTab === 'tech' ? 'Нет технологий' : 'Нет артефактов'}
+          description={activeTab === 'tech' ? 'Добавьте первую технологию вашей вселенной.' : 'Добавьте первый уникальный предмет или артефакт.'}
+          actionLabel={activeTab === 'tech' ? 'Добавить технологию' : 'Добавить артефакт'}
+          onAction={() => { setEditingItem(null); setShowForm(true); }}
+        />
+      ) : (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {(activeTab === 'tech' ? techs : artifacts).map((item: any) => (
           <div key={item.id} className="card bg-white border border-dark-100 hover:shadow-xl transition-all p-6 group">
@@ -128,6 +138,7 @@ export default function TechnologiesPage() {
           </div>
         ))}
       </div>
+      )}
 
       {showForm && (
           <TechForm

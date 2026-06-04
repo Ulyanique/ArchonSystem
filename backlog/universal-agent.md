@@ -2,8 +2,5 @@
 
 ## Задачи
 
-- [x] [высокий] Создать `docs/consistency-protocol.md` с чек-листом AICritic + links + coverage. DoD: файл создан, содержит чек-лист. (Подцель P-003)
-- [x] [высокий] Исправить удаление технологий и артефактов (п. 0.1.1 Stabilization). Заменить прямое удаление на `useMutation` с инвалидацией в `TechnologiesPage.tsx`. DoD: После удаления элемента, список в UI обновляется без перезагрузки. (Подцель P-004)
-
-
-- [ ] **[комплексная]** Изучить лучшие практики MVP для [модуля X], найти открытые решения на GitHub, интегрировать базовый код и написать тесты. (Взять роли: analyzer + builder + tester).
+- [ ] **[высокий]** Модуль 0.2.2: Валидация форм. Добавить валидацию (в т.ч. utils/validation.ts) для форм TechnologiesPage, FactionsPage, ArtifactsPage. (Роль: frontend-developer-agent)
+- [ ] **[средний]** Модуль 0.2.3: Замена `any`. Определить интерфейсы и заменить `any` в SpacePage, DevelopUniversePage, LocationsPage, CharactersPage, BookEditorPage. (Роль: frontend-developer-agent)
