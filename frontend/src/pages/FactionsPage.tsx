@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { Plus, Trash2, Edit2, Shield, Target, Flag, User, MapPin, Loader2, X, Sparkles } from 'lucide-react';
 import { factionApi, aiGeneratorApi, universesApi } from '../api';
+import EmptyState from '../components/EmptyState';
 
 export default function FactionsPage() {
   const { universeId } = useParams();
@@ -92,6 +93,16 @@ export default function FactionsPage() {
       </div>
 
       {/* Сгенерированные фракции */}
+      {factions.length === 0 && !generatedFactions && !showForm ? (
+        <EmptyState
+          icon={Flag}
+          title="Нет фракций"
+          description="Добавьте первую организацию, группировку или государство вашей вселенной."
+          actionLabel="Добавить фракцию"
+          onAction={() => { setEditingFaction(null); setShowForm(true); }}
+        />
+      ) : (
+      <>
       {generatedFactions && generatedFactions.length > 0 && (
         <div className="card p-4 mb-6 border-2 border-primary-200">
           <h3 className="font-bold text-dark-800 mb-2">Сгенерированные фракции — применить?</h3>
@@ -206,6 +217,8 @@ export default function FactionsPage() {
           </div>
         ))}
       </div>
+      </>
+      )}
 
       {showForm && (
           <FactionForm

@@ -2,8 +2,9 @@ import { useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import { Plus, Trash2, X, Loader2, Maximize2, Grid, Columns, Sparkles, Wand2, Pencil, ImagePlus } from 'lucide-react';
+import { Plus, Trash2, X, Loader2, Maximize2, Grid, Columns, Sparkles, Wand2, Pencil, ImagePlus, Image } from 'lucide-react';
 import { conceptArtApi, uploadsUrl } from '../api';
+import EmptyState from '../components/EmptyState';
 
 export default function ConceptArtPage() {
   const { universeId } = useParams();
@@ -45,7 +46,7 @@ export default function ConceptArtPage() {
 
   const generateMutation = useMutation({
     mutationFn: (body: { title: string; description: string; category?: string; tags?: string }) =>
-      conceptArtApi.generate(parseInt(universeId!), body),
+      conceptArtApi.generate(parseInt(universeId!), body as any),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['concept-art', universeId] });
       setShowGenerate(false);
@@ -150,9 +151,13 @@ export default function ConceptArtPage() {
       </div>
 
       {arts.length === 0 ? (
-        <div className="text-center py-20 border-2 border-dashed border-dark-200 rounded-3xl">
-          <p className="text-dark-400 text-lg">Галерея пока пуста. Добавьте первый концепт-арт!</p>
-        </div>
+        <EmptyState
+          icon={Image}
+          title="Нет концепт-артов"
+          description="Сгенерируйте с помощью ИИ или загрузите первые изображения для вашей вселенной."
+          actionLabel="Сгенерировать арт"
+          onAction={() => setShowGenerate(true)}
+        />
       ) : (
         <div className={viewMode === 'masonry'
           ? "columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6"
